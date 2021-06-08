@@ -1,16 +1,17 @@
 import React from "react";
+import Button from '../UI/Button';
 import styles from "./DurationSetter.module.css";
 
 const DurationSetter = (props) => {
   return (
-    <div>
+    <div className={styles.setter}>
       <header>
-        <h2>{props.mode}</h2>
+        <h2 className={styles.title}>{props.mode}</h2>
       </header>
-      <div>
-          <button>+</button>
+      <div className={styles.controls}>
+          <Button>+</Button>
           <span>10</span>
-          <button>-</button>
+          <Button>-</Button>
       </div>
     </div>
   );

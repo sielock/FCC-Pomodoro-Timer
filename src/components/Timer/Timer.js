@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "../UI/Button";
 import styles from "./Timer.module.css";
 
 const Timer = () => {
@@ -13,8 +14,8 @@ const Timer = () => {
         <p>25:00</p>
       </div>
       <div className={styles.controls}>
-        <button>Start</button>
-        <button>Stop</button>
+        <Button>Start</Button>
+        <Button>Stop</Button>
       </div>
     </div>
   );
