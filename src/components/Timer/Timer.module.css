@@ -1,0 +1,25 @@
+@font-face {
+  font-family: "digital-7";
+  src: local("digital-7"), 
+    url("/src/fonts/digital-7.ttf") format("truetype");
+  font-weight: normal;
+}
+
+.timer {
+  margin: 0 auto;
+  width: 50%;
+  max-width: 30rem;
+  padding: 1rem;
+  text-align: center;
+  color: #fff;
+}
+
+.countdown {
+  margin: 0;
+  font-size: 3rem;
+  font-family: digital-7, Arial, Helvetica, sans-serif;
+}
+
+.controls button {
+  margin: 0 1rem;
+}
