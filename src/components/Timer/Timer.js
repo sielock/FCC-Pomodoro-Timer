@@ -2,12 +2,12 @@ import React from "react";
 import Button from "../UI/Button";
 import styles from "./Timer.module.css";
 
-const Timer = () => {
+const Timer = (props) => {
   return (
     <div className={styles.timer}>
       <div className={styles.modeTitle}>
         <header>
-          <h2>Working</h2>
+          <h2>{props.mode}</h2>
         </header>
       </div>
       <div className={styles.countdown}>
