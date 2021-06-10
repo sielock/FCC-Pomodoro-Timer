@@ -3,6 +3,6 @@ This is my code for the freeCodeCamp 25+5 timer project under the Front End Libr
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ##Todo
->Add timer functionality
+>Addresss bug that causes timer to start with an extra 59 seconds upon mode switch
 >Update CSS
 >Complete any necessary refactoring

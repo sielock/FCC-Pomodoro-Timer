@@ -8,39 +8,26 @@ const App = () => {
   const [breakLength, setBreakLength] = useState(5);
   const [workLength, setWorkLength] = useState(25);
 
-  const updateMode = (newMode) => {
-    setMode(newMode);
-  };
-
-  const updateDuration = (mode, change) => {
-    if (mode === "Break") {
-      setBreakLength((prevState) =>
-        change === "increase" ? (prevState += 1) : (prevState -= 1)
-      );
-    } else {
-      setWorkLength((prevState) =>
-        change === "increase" ? (prevState += 1) : (prevState -= 1)
-      );
-    }
-  };
-
   return (
     <div>
       <Timer
         mode={mode}
-        onChange={updateMode}
-        duration={`${mode === "Working" ? workLength : breakLength}:00`}
+        updateMode={setMode}
+        workDuration={workLength}
+        updateWorkDuration={setWorkLength}
+        breakDuration={breakLength}
+        updateBreakDuration={setBreakLength}
       />
       <div className={styles.durationControlsWrapper}>
         <DurationSetter
           mode="Break"
           duration={breakLength}
-          updateDuration={updateDuration}
+          updateDuration={setBreakLength}
         />
         <DurationSetter
           mode="Working"
           duration={workLength}
-          updateDuration={updateDuration}
+          updateDuration={setWorkLength}
         />
       </div>
     </div>
