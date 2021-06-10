@@ -2,47 +2,46 @@ import React, { useEffect, useState } from "react";
 import Button from "../UI/Button";
 import styles from "./Timer.module.css";
 
-const Timer = ({
-  mode,
-  updateMode,
-  workDuration,
-  updateWorkDuration,
-  breakDuration,
-  updateBreakDuration,
-}) => {
-  const initialTime = (mode === "Working" ? workDuration : breakDuration);
+const Timer = ({ mode, setMode, breakDuration, setBreakDuration, workDuration, setWorkDuration, isRunning, setIsRunning }) => {
+  const [minutes, setMinutes] = useState(
+    mode === "Session" ? workDuration : breakDuration
+  );
   const [seconds, setSeconds] = useState(0);
-  const [display, setDisplay] = useState(25);
-  const [isRunning, setisRunning] = useState(false);
 
+  //updates minutes value depending on durationsetter values and updates if there is a change in the mode, or either setter duration
   useEffect(() => {
-    setDisplay(initialTime);
-  }, [mode, workDuration, breakDuration, initialTime]);
+    setMinutes(mode === "Session" ? workDuration : breakDuration);
+  }, [mode, workDuration, breakDuration]);
+
+  const displayMinutes = minutes < 10 ? `0${minutes}` : minutes;
+  const displaySeconds = seconds < 10 ? `0${seconds}` : seconds;
 
   useEffect(() => {
     if (isRunning) {
-      var interval = setInterval(() => {
-        if (display === 0 && seconds === 0) {
-          updateMode(mode === "Working" ? "Break" : "Working");
-        }
+      let interval = setInterval(() => {
         if (seconds === 0) {
-          setDisplay(display - 1);
-          setSeconds(59);
+          if (minutes !== 0) {
+            setSeconds(59);
+            setMinutes(minutes - 1);
+          } else {
+            setMode(mode === 'Session' ? 'Break' : 'Session');
+          }
         } else {
           setSeconds(seconds - 1);
         }
-      }, 150);
-    }
+      }, 1000);
 
-    return () => clearInterval(interval);
-  }, [isRunning, display, seconds, mode, updateMode]);
+      return () => clearInterval(interval);
+    }
+  });
 
   const resetTimer = () => {
-    setisRunning(false);
-    updateWorkDuration(25);
-    updateBreakDuration(5);
+    setWorkDuration(25);
+    setBreakDuration(5);
+    setIsRunning(false);
+    setMinutes(25);
     setSeconds(0);
-  };
+  }
 
   return (
     <div className={styles.timer}>
@@ -52,17 +51,15 @@ const Timer = ({
         </header>
       </div>
       <div className={styles.countdown}>
-        <p>{`${display > 9 ? display : `0${display}`}:${
-          seconds > 9 ? seconds : `0${seconds}`
-        }`}</p>
+        <p>
+          {displayMinutes}:{displaySeconds}
+        </p>
       </div>
       <div className={styles.controls}>
-        <Button value="start" onClick={() => setisRunning(!isRunning)}>
-          {isRunning ? "Pause" : "Start"}
+        <Button value="start" onClick={() => setIsRunning(!isRunning)}>
+          {!isRunning ? "Start" : "Stop"}
         </Button>
-        <Button value="reset" onClick={resetTimer}>
-          Reset
-        </Button>
+        <Button value="reset" onClick={resetTimer}>Reset</Button>
       </div>
     </div>
   );

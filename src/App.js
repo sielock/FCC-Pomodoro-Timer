@@ -1,35 +1,32 @@
 import React, { useState } from "react";
-import DurationSetter from "./components/Timer/DurationSetter";
+import DurationControls from "./components/UI/DurationControls";
 import Timer from "./components/Timer/Timer";
-import styles from "./App.module.css";
 
 const App = () => {
-  const [mode, setMode] = useState("Working");
-  const [breakLength, setBreakLength] = useState(5);
-  const [workLength, setWorkLength] = useState(25);
+  const [mode, setMode] = useState("Session");
+  const [breakDuration, setBreakDuration] = useState(5);
+  const [workDuration, setWorkDuration] = useState(25);
+  const [isRunning, setIsRunning] = useState(false);
 
   return (
     <div>
       <Timer
         mode={mode}
-        updateMode={setMode}
-        workDuration={workLength}
-        updateWorkDuration={setWorkLength}
-        breakDuration={breakLength}
-        updateBreakDuration={setBreakLength}
+        setMode={setMode}
+        breakDuration={breakDuration}
+        setBreakDuration={setBreakDuration}
+        workDuration={workDuration}
+        setWorkDuration={setWorkDuration}
+        isRunning={isRunning}
+        setIsRunning={setIsRunning}
       />
-      <div className={styles.durationControlsWrapper}>
-        <DurationSetter
-          mode="Break"
-          duration={breakLength}
-          updateDuration={setBreakLength}
-        />
-        <DurationSetter
-          mode="Working"
-          duration={workLength}
-          updateDuration={setWorkLength}
-        />
-      </div>
+      <DurationControls
+        workDuration={workDuration}
+        setWorkDuration={setWorkDuration}
+        breakDuration={breakDuration}
+        setBreakDuration={setBreakDuration}
+        isRunning={isRunning}
+      />
     </div>
   );
 };

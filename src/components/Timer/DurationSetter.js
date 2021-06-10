@@ -2,28 +2,16 @@ import React from "react";
 import Button from "../UI/Button";
 import styles from "./DurationSetter.module.css";
 
-const DurationSetter = ({ mode, duration, updateDuration }) => {
-  const increment = () => {
-    updateDuration(duration < 60 ? (duration += 1) : 60);
-  };
-
-  const decrement = () => {
-    updateDuration(duration > 1 ? (duration -= 1) : 1);
-  };
-
+const DurationSetter = ({ mode, duration, setDuration, isRunning }) => {
   return (
     <div className={styles.setter}>
       <header>
         <h2 className={styles.title}>{mode}</h2>
       </header>
       <div className={styles.controls}>
-        <Button value="increase" onClick={increment}>
-          +
-        </Button>
+        <Button value="increase" onClick={() => !isRunning && setDuration(duration + 1)}>+</Button>
         <span>{duration}</span>
-        <Button value="decrease" onClick={decrement}>
-          -
-        </Button>
+        <Button value="decrease" onClick={() => !isRunning && setDuration(duration - 1)}>-</Button>
       </div>
     </div>
   );
