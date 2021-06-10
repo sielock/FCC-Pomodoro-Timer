@@ -3,6 +3,6 @@ This is my code for the freeCodeCamp 25+5 timer project under the Front End Libr
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ##Todo
->Addresss bug that causes timer to start with an extra 59 seconds upon mode switch
+>Address useEffect usage in timer to address bug that resets minutes value when breakDuration is changed -- something to do with how minutes is set up and the values tracked for the useEffect hook
 >Update CSS
 >Complete any necessary refactoring

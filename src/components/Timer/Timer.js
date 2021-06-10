@@ -3,12 +3,9 @@ import Button from "../UI/Button";
 import styles from "./Timer.module.css";
 
 const Timer = ({ mode, setMode, breakDuration, setBreakDuration, workDuration, setWorkDuration, isRunning, setIsRunning }) => {
-  const [minutes, setMinutes] = useState(
-    mode === "Session" ? workDuration : breakDuration
-  );
+  const [minutes, setMinutes] = useState(mode === "Session" ? workDuration : breakDuration);
   const [seconds, setSeconds] = useState(0);
 
-  //updates minutes value depending on durationsetter values and updates if there is a change in the mode, or either setter duration
   useEffect(() => {
     setMinutes(mode === "Session" ? workDuration : breakDuration);
   }, [mode, workDuration, breakDuration]);
